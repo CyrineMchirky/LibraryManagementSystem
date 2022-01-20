@@ -77,7 +77,7 @@ public class LIreturn extends javax.swing.JFrame {
     public void UpdateReturn(){
     String sql ="INSERT INTO RETURNED(BOOK_ID,BNAME,STUDENT_ID,SNAME,DATEOFRETURN) VALUES (?,?,?,?,?) ";
     try{
-        
+         
            Calendar c = jDateChooser1.getCalendar(); //Calendar.getInstance(TimeZone.getTimeZone("GMT"));
             c.set(Calendar.HOUR_OF_DAY, 0);
             c.set(Calendar.MINUTE, 0);
