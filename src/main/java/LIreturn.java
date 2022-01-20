@@ -47,7 +47,7 @@ public class LIreturn extends javax.swing.JFrame {
 
         System.out.println("issued: " + String.valueOf(dateIssued));
         
-        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+        Calendar c = jDateChooser1.getCalendar(); //Calendar.getInstance(TimeZone.getTimeZone("GMT"));
         c.set(Calendar.HOUR_OF_DAY, 0);
         c.set(Calendar.MINUTE, 0);
         c.set(Calendar.SECOND, 0);
@@ -61,7 +61,14 @@ public class LIreturn extends javax.swing.JFrame {
         
         if (excess > 0) {
             int penalty = excess * 20;
+            String sqlExcess ="INSERT INTO PENALTIES(STUDENT_ID,AMOUNT) VALUES (?,?) ";
+        pst= conn.prepareStatement(sqlExcess);
+        pst.setInt(1,Integer.parseInt(jTextField9.getText()));
+        pst.setInt(2,penalty);
+       
+        pst.execute();
             JOptionPane.showMessageDialog(null , "this book is late, penalty is " + String.valueOf(penalty) + " TND");
+            
         } else {
             JOptionPane.showMessageDialog(null , "this book was returned within time");
         }
@@ -84,6 +91,7 @@ public class LIreturn extends javax.swing.JFrame {
             c.set(Calendar.SECOND, 0);
             c.set(Calendar.MILLISECOND, 0);
             int unixTimeStamp = (int) (c.getTimeInMillis() / 1000);
+            
         pst= conn.prepareStatement(sql);
         pst.setInt(1,Integer.parseInt(jTextField10.getText()));
         pst.setString(2,jTextField11.getText());
